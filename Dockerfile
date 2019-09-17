@@ -25,7 +25,7 @@ ENV NPM_PKGS \
         cross-env chokidar rimraf typescript \
         core-js @babel/core @babel/plugin-syntax-dynamic-import @babel/preset-env \
         webpack webpack-cli webpack-dev-middleware webpack-hot-middleware webpack-merge \
-        extract-text-webpack-plugin webpack-node-externals friendly-errors-webpack-plugin \
+        webpack-node-externals friendly-errors-webpack-plugin \
         babel-loader file-loader url-loader \
         autoprefixer css-loader stylus stylus-loader \
         @vue/cli @vue/cli-plugin-babel @vue/cli-plugin-typescript @vue/cli-service \
@@ -45,6 +45,6 @@ WORKDIR /app
 VOLUME [ "/app/src", "/app/dist"]
 COPY . .
 
-RUN npm link $NPM_PKGS .
+RUN npm link $NPM_PKGS
 ENTRYPOINT [ "just", "build"]
 
