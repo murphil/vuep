@@ -1,6 +1,5 @@
 const registry = 'http://172.178.1.204:2015/vue-components'
 const externalModules = JSON.parse(require("child_process").execSync(`curl -# ${registry}/latest.json`))
-//delete externalModules['vue']
 console.log(externalModules)
 
 module.exports = {
