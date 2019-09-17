@@ -10,7 +10,8 @@ RUN set -eux \
     libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 \
     libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 \
     libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 \
-    lsb-release xdg-utils wget curl \
+    lsb-release xdg-utils \
+    git wget curl \
   ; apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 ENV just_version=0.4.4 watchexec_version=1.10.3
