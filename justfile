@@ -1,5 +1,5 @@
 build version path="src/index.vue":
-    npx vue-cli-service build --target lib --formats umd --no-clean --dest dist --name "${PKG_NAME}.{{version}}" {{path}}
+    npx vue-cli-service build --target lib --formats umd --formats umd-min --no-clean --dest dist --name "${PKG_NAME}.{{version}}" {{path}}
 
 publish dist:
     scp "dist/${PKG_NAME}.umd.min.js" \
@@ -8,4 +8,4 @@ publish dist:
 
 
 image:
-    docker build -t vuepkg -f Dockerfile-1 .
+    docker build -t vuepkg -f Dockerfile .
