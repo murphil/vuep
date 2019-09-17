@@ -43,8 +43,5 @@ RUN set -eux \
 
 WORKDIR /app
 VOLUME [ "/app/src", "/app/dist"]
-COPY . .
 
-RUN npm link $NPM_PKGS
-ENTRYPOINT [ "just", "build"]
 
