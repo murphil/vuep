@@ -1,0 +1,4 @@
+FROM vuep
+COPY . .
+
+ENTRYPOINT [ "just", "build"]

@@ -30,18 +30,20 @@ ENV NPM_PKGS \
         autoprefixer css-loader stylus stylus-loader \
         @vue/cli @vue/cli-plugin-babel @vue/cli-plugin-typescript @vue/cli-service \
         vue-loader vue-template-compiler vue-style-loader vue-server-renderer \
-        vue vuex vue-router vuex-router-sync vue-class-component vue-property-decorator axios \
-        git+https://github.com/murphil/externalcomponent.git
+        vue vuex vue-router vuex-router-sync vue-class-component vue-property-decorator axios
+
+WORKDIR /app
 
 RUN set -eux \
   ; npm -g install node-gyp \
-    $NPM_PKGS \
+        $NPM_PKGS \
+        git+https://github.com/murphil/externalcomponent.git \
+    npm link $NPM_PKGS externalcomponent \
   # clean
   ; npm cache clean -f \
   ; npm config set registry https://registry.npm.taobao.org
 
 
-WORKDIR /app
 VOLUME [ "/app/src", "/app/dist"]
 
 

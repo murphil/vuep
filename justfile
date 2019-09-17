@@ -8,4 +8,4 @@ publish dist:
 
 
 image:
-    docker build . -t vuepkg -f Dockerfile-1
+    docker build -t vuepkg -f Dockerfile-1 .
