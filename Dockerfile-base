@@ -30,7 +30,8 @@ ENV NPM_PKGS \
         autoprefixer css-loader stylus stylus-loader \
         @vue/cli @vue/cli-plugin-babel @vue/cli-plugin-typescript @vue/cli-service \
         vue-loader vue-template-compiler vue-style-loader vue-server-renderer \
-        vue vuex vue-router vuex-router-sync vue-class-component vue-property-decorator axios
+        vue vuex vue-router vuex-router-sync vue-class-component vue-property-decorator axios \
+        node-sass sass-loader
 
 WORKDIR /app
 

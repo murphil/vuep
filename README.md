@@ -29,3 +29,22 @@ docker run \
     vuepkg \
     1.2.3 [src/index.vue]
 ```
+
+批量构建示例:
+```bash
+mod prefix="components/v1":
+    #!/bin/bash
+    prefix={{prefix}}
+    for f in $(find $prefix -name '*.vue'); do
+        x1=${f/$prefix\//}
+        x2=${x1%.vue}
+        n=${x2//\//-}
+        echo $n $(dirname $f) $(basename $f)
+        docker run \
+            -v $(pwd)/$(dirname $f):/app/src \
+            -v $(pwd)/dist:/app/dist \
+            -e PKG_NAME=$n \
+            vuep \
+            0.0.1 src/$(basename $f)
+    done
+```
