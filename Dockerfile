@@ -36,10 +36,9 @@ WORKDIR /app
 
 RUN set -eux \
   ; npm -g install node-gyp \
-        $NPM_PKGS \
+  ; npm install $NPM_PKGS \
         git+https://github.com/murphil/externalcomponent.git \
-    npm link $NPM_PKGS externalcomponent \
-  # clean
+  # npm link $NPM_PKGS externalcomponent \
   ; npm cache clean -f \
   ; npm config set registry https://registry.npm.taobao.org
 
