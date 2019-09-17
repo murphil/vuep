@@ -42,7 +42,8 @@ RUN set -eux \
   ; npm cache clean -f \
   ; npm config set registry https://registry.npm.taobao.org
 
-
 VOLUME [ "/app/src", "/app/dist"]
 
+COPY . .
 
+ENTRYPOINT [ "just", "build"]

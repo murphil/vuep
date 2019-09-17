@@ -23,9 +23,9 @@
 ## run
 ``` bash
 docker run \
-    -e PKG_NAME xxx \
     -v $(pwd)/src:/app/src \
     -v $(pwd)/dist:/app/dist \
-    vuep \
+    -e PKG_NAME=xxx \
+    vuepkg \
     1.2.3 [src/index.vue]
 ```
