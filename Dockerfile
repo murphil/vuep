@@ -41,9 +41,9 @@ RUN set -eux \
 
 
 WORKDIR /app
-VOLUME [ "/app/src", "/app/dist", "/root/.ssh" ]
+VOLUME [ "/app/src", "/app/dist"]
 COPY . .
 
 RUN npm link $NPM_PKGS .
-CMD [ "just", "build"]
+ENTRYPOINT [ "just", "build"]
 

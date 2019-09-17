@@ -1,5 +1,5 @@
-const registry = 'http://172.178.1.204:2015/vue-components'
-const externalModules = JSON.parse(require("child_process").execSync(`curl -# ${registry}/latest.json`))
+const registry = process.env.PKG_REGISTRY
+const externalModules = registry ? JSON.parse(require("child_process").execSync(`curl -# ${registry}/${process.env.PKG_INDEX||'latest.json'}`)) : {}
 console.log(externalModules)
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
             .end()
             .use("yaml-loader")
             .loader("yaml-loader");
-        if (!process.env.dev) return
+        if (!process.env.WITH_HTML) return
         config
             .plugin('html')
             .tap(args => {
