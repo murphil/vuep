@@ -26,7 +26,7 @@ ENV NPM_PKGS \
         core-js @babel/core @babel/plugin-syntax-dynamic-import @babel/preset-env \
         webpack webpack-cli webpack-dev-middleware webpack-hot-middleware webpack-merge \
         webpack-node-externals friendly-errors-webpack-plugin \
-        babel-loader file-loader url-loader \
+        babel-loader ts-loader file-loader url-loader \
         autoprefixer css-loader stylus stylus-loader \
         @vue/cli @vue/cli-plugin-babel @vue/cli-plugin-typescript @vue/cli-service \
         vue-loader vue-template-compiler vue-style-loader vue-server-renderer \

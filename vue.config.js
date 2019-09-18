@@ -28,6 +28,8 @@ module.exports = {
             if (request === 'vue') {
                 //callback(null, 'Vue');
                 callback();
+            } else if (request.startsWith('@') || request.startsWith('~')) {
+                callback()
             } else if (request in externalModules) {
                 callback(null, `() => externalComponent('${registry}','${request}.${externalModules[request]}')`)
             } else {
