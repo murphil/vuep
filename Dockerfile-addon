@@ -1,0 +1,26 @@
+FROM nnurphy/vuep:base
+
+ENV NPM_PKGS \
+        cross-env chokidar rimraf typescript \
+        core-js @babel/core @babel/plugin-syntax-dynamic-import @babel/preset-env \
+        webpack webpack-cli webpack-dev-middleware webpack-hot-middleware webpack-merge \
+        webpack-node-externals friendly-errors-webpack-plugin \
+        babel-loader ts-loader file-loader url-loader \
+        autoprefixer css-loader stylus stylus-loader \
+        @vue/cli @vue/cli-plugin-babel @vue/cli-plugin-typescript @vue/cli-service \
+        vue-loader vue-template-compiler vue-style-loader vue-server-renderer \
+        vue vuex vue-router vuex-router-sync vue-class-component vue-property-decorator \
+        vuex-class \
+        node-sass sass-loader axios \
+
+WORKDIR /app
+COPY package.tmpl.json .
+RUN set -eux \
+  ; npm -g install node-gyp \
+  ; npm install $NPM_PKGS \
+        git+https://github.com/murphil/externalcomponent.git \
+  # npm link $NPM_PKGS externalcomponent \
+  ; npm cache clean -f \
+  ; npm config set registry https://registry.npm.taobao.org
+
+VOLUME [ "/app/src", "/app/dist"]

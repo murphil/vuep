@@ -1,4 +1,4 @@
-FROM nnurphy/vuep:base
+FROM nnurphy/vuep:addon
 
 COPY . .
 ENTRYPOINT [ "just", "build"]

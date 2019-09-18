@@ -6,6 +6,7 @@ publish dist:
         "dist/${PKG_NAME}.umd.min.js.map" \
         {{dist}}/${PKG_NAME}
 
-
+image-addon:
+    docker build -t vuep:addon -f Dockerfile-addon .
 image:
     docker build -t vuep -f Dockerfile .
