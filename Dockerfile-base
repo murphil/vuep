@@ -30,11 +30,12 @@ ENV NPM_PKGS \
         autoprefixer css-loader stylus stylus-loader \
         @vue/cli @vue/cli-plugin-babel @vue/cli-plugin-typescript @vue/cli-service \
         vue-loader vue-template-compiler vue-style-loader vue-server-renderer \
-        vue vuex vue-router vuex-router-sync vue-class-component vue-property-decorator axios \
-        node-sass sass-loader
+        vue vuex vue-router vuex-router-sync vue-class-component vue-property-decorator \
+        vuex-class \
+        node-sass sass-loader axios \
 
 WORKDIR /app
-
+COPY package.tmpl.json package.json
 RUN set -eux \
   ; npm -g install node-gyp \
   ; npm install $NPM_PKGS \
