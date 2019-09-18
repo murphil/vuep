@@ -35,7 +35,7 @@ ENV NPM_PKGS \
         node-sass sass-loader axios \
 
 WORKDIR /app
-COPY package.tmpl.json package.json
+#COPY package.tmpl.json package.json
 RUN set -eux \
   ; npm -g install node-gyp \
   ; npm install $NPM_PKGS \
