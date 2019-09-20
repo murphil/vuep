@@ -10,13 +10,15 @@ const uCase = ['~/plugins/TsVue'
 const externalModules = {
     saasTsVue: '1.2.3'
 }
+
+console.log('-----projExts------------------------------')
 uCase.forEach(name => {
     projExts({
         externalModules, name
     })
 })
 
-console.log('-----------------------------------')
+console.log('-----直接调用------------------------------')
 
 const matcher = matchRegexp(manifest)
 uCase.forEach(name => {
