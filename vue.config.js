@@ -30,10 +30,15 @@ module.exports = {
             if (request === 'vue') {
                 //callback(null, 'Vue');
                 callback();
-            } else if (isExt(request)) {
-                callback(null, `() => externalComponent('${registry}','${projExts({externalModules, name: request})}')`)
             } else if (request in externalModules) {
                 callback(null, `() => externalComponent('${registry}','${request}.${externalModules[request]}')`)
+            } else if (isExt(request)) {
+                let r = projExts({externalModules, name: request, callback})
+                if (r) {
+                    callback(null, `() => externalComponent('${registry}','${r}')`)
+                } else {
+                    callback();
+                }
             } else {
                 callback();
             }
