@@ -50,5 +50,5 @@ batch prefix="components/v1":
 ### 使用
 项目入口添加
 ```js
-window.externalComponent = require('externalcomponent')
+global.externalComponent = require('externalcomponent')
 ```
