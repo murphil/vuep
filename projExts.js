@@ -6,30 +6,23 @@ const matchRule = o => {
             nk, o[k]
         ])
     })
-    return (name, version) => {
+    return (name, ms) => {
         for (let [r, cb] of no) {
             if (r.test(name)) {
-                return cb(name, version)
+                return cb(name, ms)
             }
         }
     }
 }
-const matcher = matchRule({
-    '^~/plugins/TsVue$' (name, version) {
-        return
-    },
-    '.*' (name, version) {
-        return `${name}.${version}`
-    }
-})
+const matcher = matchRule(require('./manifest'))
 
 module.exports = {
     isExt(name) {
         return name.startsWith('@') || name.startsWith('~')
     },
     projExts({externalModules, name}) {
-        let comp = matcher(name, externalModules[name])
-        console.log(`match component: ${comp}`)
+        let comp = matcher(name, externalModules)
+        console.log(`match component '${name}' as '${comp}'`)
         return comp
     }
 }
