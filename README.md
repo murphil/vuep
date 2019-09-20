@@ -32,10 +32,8 @@ build name dir file version="0.0.0":
         -e PKG_NAME={{name}} \
         nnurphy/vuep \
         {{version}} src/{{file}}
-```
 
-批量构建示例:
-```bash
+#批量构建
 batch prefix="components/v1":
     #!/bin/bash
     prefix={{prefix}}
@@ -43,7 +41,13 @@ batch prefix="components/v1":
         x1=${f/$prefix\//}
         x2=${x1%.vue}
         n=${x2//\//-}
-        just build $n $(dirname $f) $(basename $f) 0.0.0
+        v="0.0.1"
+        just build $n $(dirname $f) $(basename $f) $v
+        ssh eng "mkdir -p ~/Downloads/vue-components/$n/"
+        echo "---> upload component to eng:~/Downloads/vue-components/$n/"
+        scp "dist/$n.$v.umd.min.js" \
+            "dist/$n.$v.umd.min.js.map" \
+            eng:~/Downloads/vue-components/$n/
     done
 ```
 
