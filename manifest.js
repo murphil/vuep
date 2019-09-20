@@ -7,7 +7,7 @@ module.exports = {
     },
     '^~/components/v1/(.*).vue$' (n, m, ms) {
         let name = m[1].split('/').join('-')
-        return `${name}.${ms[name]}}`
+        return `${name}.${ms[name]}`
     },
     '^[~@]\(.*\)' (name, m, ms) {
         return m[1] + '.' + (ms[m[1]] || '0.0.0')
