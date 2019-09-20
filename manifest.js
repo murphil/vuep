@@ -1,8 +1,8 @@
 module.exports = {
-    '^~/plugins/TsVue$' (name, ms, m) {
+    '^~/plugins/TsVue$' (name, m, ms) {
         return 'saasTsVue.' + ms['saasTsVue']
     },
-    '^[~@]\(.*\)' (name, ms, m) {
+    '^[~@]\(.*\)' (name, m, ms) {
         return m[1] + '.' + (ms[m[1]] || '0.0.0')
     },
     '.*' (name, ms) {

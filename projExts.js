@@ -1,21 +1,5 @@
-const matchRule = o => {
-    const no = []
-    Object.keys(o).forEach(k => {
-        const nk = new RegExp(k)
-        no.push([
-            nk, o[k]
-        ])
-    })
-    return (name, ms) => {
-        for (let [r, cb] of no) {
-            let m = name.match(r)
-            if (m) {
-                return cb(name, ms, m)
-            }
-        }
-    }
-}
-const matcher = matchRule(require('./manifest'))
+const matchRegexp = require('./matchRegexp')
+const matcher = matchRegexp(require('./manifest'))
 
 module.exports = {
     isExt(name) {

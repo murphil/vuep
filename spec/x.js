@@ -1,14 +1,25 @@
 const { projExts } = require('../projExts')
-
+const matchRegexp = require('../matchRegexp')
+const manifest = require('../manifest')
     ;
-[ '~/plugins/TsVue'
-, '~sadf-x'
-, '@xxx'
-, 'asdf'
-].forEach(name => {
+const uCase = ['~/plugins/TsVue'
+    , '~sadf-x'
+    , '@xxx'
+    , 'asdf'
+]
+const externalModules = {
+    saasTsVue: '1.2.3'
+}
+uCase.forEach(name => {
     projExts({
-        externalModules: {
-            saasTsVue: '1.2.3'
-        }, name
+        externalModules, name
     })
+})
+
+console.log('-----------------------------------')
+
+const matcher = matchRegexp(manifest)
+uCase.forEach(name => {
+    let r = matcher(name, externalModules)
+    console.log(r)
 })
