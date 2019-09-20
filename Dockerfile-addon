@@ -1,8 +1,8 @@
 FROM nnurphy/vuep:base
 
 ENV NPM_PKGS \
-        cross-env chokidar rimraf typescript \
-        core-js @babel/core @babel/plugin-syntax-dynamic-import @babel/preset-env \
+        cross-env chokidar rimraf typescript core-js \
+        @babel/core @babel/plugin-syntax-dynamic-import @babel/preset-env @babel/polyfill \
         webpack webpack-cli webpack-dev-middleware webpack-hot-middleware webpack-merge \
         webpack-node-externals friendly-errors-webpack-plugin \
         babel-loader ts-loader file-loader url-loader \
