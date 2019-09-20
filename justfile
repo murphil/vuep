@@ -7,6 +7,6 @@ publish dist:
         {{dist}}/${PKG_NAME}
 
 image-addon:
-    docker build -t vuep:addon -f Dockerfile-addon .
+    docker build -t nnurphy/vuep:addon -f Dockerfile-addon .
 image:
-    docker build -t vuep -f Dockerfile .
+    docker build -t nnurphy/vuep -f Dockerfile .

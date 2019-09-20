@@ -2,6 +2,8 @@ const registry = process.env.PKG_REGISTRY
 const externalModules = registry ? JSON.parse(require("child_process").execSync(`curl -# ${registry}/${process.env.PKG_INDEX||'latest.json'}`)) : {}
 console.log(externalModules)
 
+const { projExts, isExt } = require('./projExts.js')
+
 module.exports = {
     chainWebpack: config => {
         config.module
@@ -28,8 +30,8 @@ module.exports = {
             if (request === 'vue') {
                 //callback(null, 'Vue');
                 callback();
-            } else if (request.startsWith('@') || request.startsWith('~')) {
-                callback()
+            } else if (isExt(request)) {
+                callback(null, `() => externalComponent('${registry}','${projExts({externalModules, name: request})}')`)
             } else if (request in externalModules) {
                 callback(null, `() => externalComponent('${registry}','${request}.${externalModules[request]}')`)
             } else {

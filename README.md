@@ -48,3 +48,9 @@ mod prefix="components/v1":
             0.0.1 src/$(basename $f)
     done
 ```
+
+### 使用
+项目入口添加
+```js
+window.externalComponent = require('externalcomponent')
+```
