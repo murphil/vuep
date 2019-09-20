@@ -22,30 +22,28 @@
 
 ## run
 ``` bash
-docker run \
-    -v $(pwd)/src:/app/src \
-    -v $(pwd)/dist:/app/dist \
-    -e PKG_NAME=xxx \
-    vuepkg \
-    1.2.3 [src/index.vue]
+build name dir file version="0.0.0":
+    echo "build...   " {{name}} {{dir}} {{file}}
+    docker run \
+        -v $(pwd)/{{dir}}:/app/src \
+        -v $(pwd)/dist:/app/dist \
+        -v $(pwd)/manifest.js:/app/manifest.js \
+        -e PKG_REGISTRY=http://172.178.1.204:2015/vue-components \
+        -e PKG_NAME={{name}} \
+        nnurphy/vuep \
+        {{version}} src/{{file}}
 ```
 
 批量构建示例:
 ```bash
-mod prefix="components/v1":
+batch prefix="components/v1":
     #!/bin/bash
     prefix={{prefix}}
     for f in $(find $prefix -name '*.vue'); do
         x1=${f/$prefix\//}
         x2=${x1%.vue}
         n=${x2//\//-}
-        echo $n $(dirname $f) $(basename $f)
-        docker run \
-            -v $(pwd)/$(dirname $f):/app/src \
-            -v $(pwd)/dist:/app/dist \
-            -e PKG_NAME=$n \
-            vuep \
-            0.0.1 src/$(basename $f)
+        just build $n $(dirname $f) $(basename $f) 0.0.0
     done
 ```
 
