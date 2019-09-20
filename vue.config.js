@@ -33,7 +33,7 @@ module.exports = {
             } else if (request in externalModules) {
                 callback(null, `() => externalComponent('${registry}','${request}.${externalModules[request]}')`)
             } else if (isExt(request)) {
-                let r = projExts({externalModules, name: request, callback})
+                let r = projExts({externalModules, name: request})
                 if (r) {
                     callback(null, `() => externalComponent('${registry}','${r}')`)
                 } else {
