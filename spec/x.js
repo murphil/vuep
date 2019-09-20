@@ -1,5 +1,14 @@
-const {projExts} = require('../projExts')
+const { projExts } = require('../projExts')
 
-projExts({externalModules:{
-    saasTsVue: '1.2.3'
-}, name: '~/plugins/TsVue'})
+    ;
+[ '~/plugins/TsVue'
+, '~sadf-x'
+, '@xxx'
+, 'asdf'
+].forEach(name => {
+    projExts({
+        externalModules: {
+            saasTsVue: '1.2.3'
+        }, name
+    })
+})

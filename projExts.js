@@ -8,8 +8,9 @@ const matchRule = o => {
     })
     return (name, ms) => {
         for (let [r, cb] of no) {
-            if (r.test(name)) {
-                return cb(name, ms)
+            let m = name.match(r)
+            if (m) {
+                return cb(name, ms, m)
             }
         }
     }
