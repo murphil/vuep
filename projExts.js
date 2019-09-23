@@ -15,9 +15,14 @@ module.exports = {
             callback(null, `() => externalComponent('${registry}','${name}.${externalModules[name]}')`)
         } else {
             let comp = matcher(name)
-            if (comp && comp in externalModules) {
-                console.log(`[matched] ${name} --> ${comp}`)
-                callback(null, `() => externalComponent('${registry}','${comp}.${externalModules[comp]}')`)
+            if (comp) {
+                if (comp in externalModules) {
+                    console.log(`[used] ${name} --> ${comp}`)
+                    callback(null, `() => externalComponent('${registry}','${comp}.${externalModules[comp]}')`)
+                } else {
+                    console.log(`[matched] ${comp}`)
+                    callback(null, `() => externalComponent('${registry}','${comp}')`)
+                }
             } else {
                 callback()
             }
