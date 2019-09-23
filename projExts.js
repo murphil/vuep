@@ -2,12 +2,18 @@ const matchRegexp = require('./matchRegexp')
 const matcher = matchRegexp(require('./manifest'))
 
 module.exports = {
-    isExt(name) {
-        return name.startsWith('@') || name.startsWith('~')
-    },
-    projExts({externalModules, name}) {
-        let comp = matcher(name, externalModules)
-        console.log(`match component '${name}' as '${comp}'`)
-        return comp
+    projExts({ externalModules, name, callback, registry }) {
+        if (name === 'vue') {
+            callback()
+        } else if (name in externalModules) {
+            callback(null, `() => externalComponent('${registry}','${request}.${externalModules[request]}')`)
+        } else {
+            let comp = matcher(name, externalModules)
+            if (comp) {
+                callback(null, `() => externalComponent('${registry}','${comp}')`)
+            } else {
+                callback()
+            }
+        }
     }
 }
