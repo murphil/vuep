@@ -8,7 +8,8 @@ console.log(externalModules)
 
 module.exports = {
     projExts({ name, callback }) {
-        if (name === 'vue') {
+        if (['vue', 'vuex', 'vue-router'].includes(name)) {
+            console.log(`[ignore] ${name}`)
             callback()
         } else if (name in externalModules) {
             console.log(`[used] ${name}`)
