@@ -8,9 +8,9 @@ module.exports = {
         } else if (name in externalModules) {
             callback(null, `() => externalComponent('${registry}','${request}.${externalModules[request]}')`)
         } else {
-            let comp = matcher(name, externalModules)
-            if (comp) {
-                callback(null, `() => externalComponent('${registry}','${comp}')`)
+            let comp = matcher(name)
+            if (comp && comp in externalModules) {
+                callback(null, `() => externalComponent('${registry}','${externalModules[comp]}')`)
             } else {
                 callback()
             }
