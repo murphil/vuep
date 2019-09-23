@@ -11,6 +11,7 @@ module.exports = {
         if (name === 'vue') {
             callback()
         } else if (name in externalModules) {
+            console.log(`[used] ${name}`)
             callback(null, `() => externalComponent('${registry}','${name}.${externalModules[name]}')`)
         } else {
             let comp = matcher(name)
