@@ -1,6 +1,3 @@
-const registry = process.env.PKG_REGISTRY
-const externalModules = registry ? JSON.parse(require("child_process").execSync(`curl -# ${registry}/${process.env.PKG_INDEX || 'latest.json'}`)) : {}
-
 const { projExts } = require('./projExts.js')
 
 module.exports = {
@@ -26,7 +23,7 @@ module.exports = {
     },
     configureWebpack: config => {
         config.externals = (context, request, callback) => {
-            projExts({ externalModules, name: request, callback, registry })
+            projExts({ name: request, callback })
         }
     }
 };
