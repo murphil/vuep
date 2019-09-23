@@ -15,7 +15,7 @@ module.exports = {
         } else {
             let comp = matcher(name)
             if (comp && comp in externalModules) {
-                console.log(`--> match ${name} as ${comp}`)
+                console.log(`[matched] ${name} --> ${comp}`)
                 callback(null, `() => externalComponent('${registry}','${comp}.${externalModules[comp]}')`)
             } else {
                 callback()
