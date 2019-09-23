@@ -20,7 +20,7 @@ module.exports = {
                     console.log(`[used] ${name} --> ${comp}`)
                     callback(null, `() => externalComponent('${registry}','${comp}.${externalModules[comp]}')`)
                 } else {
-                    console.log(`[matched] ${comp}`)
+                    console.log(`[matched] ${name} --> ${comp}`)
                     callback(null, `() => externalComponent('${registry}','${comp}')`)
                 }
             } else {
