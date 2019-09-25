@@ -17,12 +17,13 @@ function matchRegexp(o) {
 }
 
 function mkImport (registry, loader) {
-    return (strings, name) => {
-        let rv = `() => ${strings[0] || loader}('${registry}','${name}')`
-        console.log(rv)
+    return (name, reg, ld) => {
+        let rv = `() => ${ld || loader}('${reg || registry}','${name}')`
+        console.log('[importStmt] ', rv)
         return rv
     }
 }
+
 
 module.exports = function mkProjExts (matchlist, externalModules, registry) {
     const matcher = matchRegexp(matchlist)
@@ -32,16 +33,16 @@ module.exports = function mkProjExts (matchlist, externalModules, registry) {
             callback()
         } else if (name in externalModules) {
             console.log(`[used] ${name}`)
-            callback(null, importStmt`${name}.${externalModules[name]}`)
+            callback(null, importStmt(`${name}.${externalModules[name]}`))
         } else {
             let comp = matcher(name)
             if (comp) {
                 if (comp in externalModules) {
                     console.log(`[used] ${name} --> ${comp}`)
-                    callback(null, importStmt`${comp}.${externalModules[comp]}`)
+                    callback(null, importStmt(`${comp}.${externalModules[comp]}`))
                 } else {
                     console.log(`[matched] ${name} --> ${comp}`)
-                    callback(null, importStmt`${comp}`)
+                    callback(null, importStmt(`${comp}`))
                 }
             } else {
                 callback()
