@@ -1,4 +1,10 @@
-const { projExts } = require('./projExts.js')
+const path = require('path')
+const mkProjExts = require('./projExts.js')
+const registry = 'vue.d'
+const manifest = path.resolve(path.join(__dirname, './manifest'))
+const externalModules = registry ? JSON.parse(require("child_process").execSync(`curl -# ${registry}/${process.env.PKG_INDEX || 'latest.json'}`)) : {}
+console.log(externalModules)
+const projExts = mkProjExts(require(manifest), externalModules, registry)
 
 module.exports = {
     chainWebpack: config => {
