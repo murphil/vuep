@@ -1,6 +1,6 @@
 const path = require('path')
 const mkProjExts = require('./projExts.js')
-const registry = 'vue.d'
+const registry = process.env.PKG_REGISTRY || 'vue.d'
 const manifest = path.resolve(path.join(__dirname, './manifest'))
 const externalModules = registry ? JSON.parse(require("child_process").execSync(`curl -# ${registry}/${process.env.PKG_INDEX || 'latest.json'}`)) : {}
 console.log(externalModules)
