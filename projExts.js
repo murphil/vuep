@@ -16,36 +16,27 @@ function matchRegexp(o) {
     }
 }
 
-function mkImport (registry, loader) {
-    return (name, reg, ld) => {
-        let rv = `() => ${ld || loader}('${reg || registry}','${name}')`
-        console.log('[importStmt] ', rv)
-        return rv
-    }
-}
 
-
-module.exports = function mkProjExts (matchlist, externalModules, registry) {
+module.exports = function mkProjExts(matchlist, externalModules) {
     const matcher = matchRegexp(matchlist)
-    const importStmt = mkImport(registry, 'externalComponent')
-    return ({ name, callback }) => {
+    return name => {
         if (['vue', 'vuex', 'vue-router'].includes(name)) {
-            callback()
+            return
         } else if (name in externalModules) {
             console.log(`[used] ${name}`)
-            callback(null, importStmt(`${name}.${externalModules[name]}`))
+            return `${name}.${externalModules[name]}`
         } else {
             let comp = matcher(name)
             if (comp) {
                 if (comp in externalModules) {
                     console.log(`[used] ${name} --> ${comp}`)
-                    callback(null, importStmt(`${comp}.${externalModules[comp]}`))
+                    return `${comp}.${externalModules[comp]}`
                 } else {
                     console.log(`[matched] ${name} --> ${comp}`)
-                    callback(null, importStmt(`${comp}`))
+                    return comp
                 }
             } else {
-                callback()
+                return
             }
         }
     }

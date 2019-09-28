@@ -4,8 +4,15 @@ const manifest = path.resolve(path.join(__dirname, './manifest'))
 const externalModules = registry ? JSON.parse(require("child_process").execSync(`curl -# ${registry}/${process.env.PKG_INDEX || 'latest.json'}`)) : {}
 console.log(externalModules)
 
-const mkProjExts = require('./projExts.js')
-const projExts = mkProjExts(require(manifest), externalModules, registry)
+const projExts = require('./projExts.js')(require(manifest), externalModules)
+function mkImport(registry, loader) {
+    return (name, ori, reg, ld) => {
+        let rv = `() => ${ld || loader}('${reg || registry}','${name}')`
+        console.log('[importStmt] ', rv)
+        return rv
+    }
+}
+const impStmt = mkImport(registry, 'externalComponent')
 
 module.exports = {
     chainWebpack: config => {
@@ -30,7 +37,12 @@ module.exports = {
     },
     configureWebpack: config => {
         config.externals = (context, request, callback) => {
-            projExts({ name: request, callback })
+            let r = projExts(request)
+            if (r) {
+                callback(null, impStmt(r, request))
+            } else {
+                callback()
+            }
         }
     }
 };
