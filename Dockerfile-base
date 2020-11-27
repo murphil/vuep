@@ -10,13 +10,11 @@ RUN set -eux \
     libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 \
     libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 \
     libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 \
-    lsb-release xdg-utils \
+    lsb-release xdg-utils inotify-tools incron \
     git wget curl \
   ; apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
-ENV just_version=0.5.10 watchexec_version=1.10.3
+ENV just_version=0.5.10
 RUN set -ex \
   ; wget -q -O- https://github.com/casey/just/releases/download/v${just_version}/just-v${just_version}-x86_64-unknown-linux-musl.tar.gz \
-    | tar zxf - -C /usr/local/bin just \
-  ; wget -q -O- https://github.com/watchexec/watchexec/releases/download/${watchexec_version}/watchexec-${watchexec_version}-x86_64-unknown-linux-musl.tar.gz \
-    | tar zxf - --strip-components=1 -C /usr/local/bin watchexec-${watchexec_version}-x86_64-unknown-linux-musl/watchexec
+    | tar zxf - -C /usr/local/bin just
